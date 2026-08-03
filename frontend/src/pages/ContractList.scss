@@ -1,0 +1,89 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+
+.contract-list {
+  padding: 2rem;
+  max-width: 1584px;
+  margin: 0 auto;
+}
+
+.contract-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-06;
+
+  h1 {
+    @include type-style('productive-heading-05');
+    color: var(--cds-text-primary);
+    margin: 0;
+  }
+}
+
+.contract-list-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: $spacing-02;
+}
+
+.text-secondary {
+  color: var(--cds-text-secondary);
+  @include type-style('body-compact-01');
+}
+
+// Table customizations
+:global {
+  .cds--data-table-container {
+    margin-bottom: $spacing-05;
+  }
+
+  .cds--table-toolbar {
+    background: var(--cds-layer-01);
+  }
+
+  .cds--data-table {
+    background: var(--cds-layer-01);
+  }
+
+  .cds--data-table thead {
+    background: var(--cds-layer-02);
+  }
+
+  .cds--data-table tbody tr:hover {
+    background: var(--cds-layer-hover);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 672px) {
+  .contract-list {
+    padding: 1rem;
+  }
+
+  .contract-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-04;
+
+    h1 {
+      @include type-style('productive-heading-04');
+    }
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// Made with Bob

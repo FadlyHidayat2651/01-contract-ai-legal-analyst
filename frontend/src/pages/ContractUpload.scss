@@ -1,0 +1,184 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+
+.contract-upload {
+  padding: 2rem;
+  max-width: 1056px;
+  margin: 0 auto;
+}
+
+.upload-header {
+  margin-bottom: $spacing-07;
+
+  h1 {
+    @include type-style('productive-heading-05');
+    color: var(--cds-text-primary);
+    margin: 0 0 $spacing-03 0;
+  }
+
+  p {
+    @include type-style('body-compact-01');
+    color: var(--cds-text-secondary);
+    margin: 0;
+  }
+}
+
+.upload-container {
+  padding: $spacing-07;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-06;
+}
+
+.file-info {
+  padding: $spacing-05;
+  background: var(--cds-layer-02);
+  border-radius: 4px;
+
+  .file-details {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    @include type-style('body-compact-01');
+    color: var(--cds-text-primary);
+
+    strong {
+      color: var(--cds-text-secondary);
+    }
+
+    .file-size {
+      color: var(--cds-text-secondary);
+    }
+  }
+}
+
+.upload-progress {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-04;
+
+  .progress-text {
+    @include type-style('body-compact-01');
+    color: var(--cds-text-secondary);
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.upload-actions {
+  display: flex;
+  gap: $spacing-04;
+  padding-top: $spacing-05;
+  border-top: 1px solid var(--cds-border-subtle);
+}
+
+.upload-info {
+  margin-top: $spacing-07;
+  padding: $spacing-05;
+  background: var(--cds-layer-02);
+  border-radius: 4px;
+
+  h3 {
+    @include type-style('productive-heading-02');
+    color: var(--cds-text-primary);
+    margin: 0 0 $spacing-04 0;
+  }
+
+  ul {
+    @include type-style('body-compact-01');
+    color: var(--cds-text-primary);
+    margin: 0;
+    padding-left: $spacing-06;
+    list-style-type: disc;
+
+    li {
+      margin-bottom: $spacing-03;
+      line-height: 1.6;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.upload-success {
+  padding: $spacing-07;
+  text-align: center;
+
+  .success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-05;
+  }
+
+  .success-icon {
+    color: var(--cds-support-success);
+  }
+
+  h2 {
+    @include type-style('productive-heading-04');
+    color: var(--cds-text-primary);
+    margin: 0;
+  }
+
+  p {
+    @include type-style('body-compact-01');
+    color: var(--cds-text-secondary);
+    margin: 0;
+    max-width: 500px;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: $spacing-04;
+    margin-top: $spacing-05;
+  }
+}
+
+// File uploader customization
+:global {
+  .cds--file__container {
+    margin-bottom: 0;
+  }
+
+  .cds--file__drop-container {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 672px) {
+  .contract-upload {
+    padding: 1rem;
+  }
+
+  .upload-container,
+  .upload-success {
+    padding: $spacing-05;
+  }
+
+  .upload-actions,
+  .success-actions {
+    flex-direction: column;
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .file-details {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
+
+// Made with Bob

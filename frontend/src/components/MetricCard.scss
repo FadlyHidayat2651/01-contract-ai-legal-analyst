@@ -1,0 +1,80 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+
+.metric-card {
+  height: 100%;
+  padding: $spacing-05;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.metric-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.metric-card-title {
+  @include type-style('label-01');
+  color: var(--cds-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-card-icon {
+  color: var(--cds-icon-secondary);
+  opacity: 0.6;
+}
+
+.metric-card-value {
+  @include type-style('productive-heading-05');
+  color: var(--cds-text-primary);
+  font-weight: 600;
+  margin-top: $spacing-02;
+}
+
+.metric-card-change {
+  display: flex;
+  align-items: center;
+  gap: $spacing-02;
+  @include type-style('label-01');
+  font-weight: 600;
+
+  &.positive {
+    color: var(--cds-support-success);
+  }
+
+  &.negative {
+    color: var(--cds-support-error);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.metric-card-subtitle {
+  @include type-style('helper-text-01');
+  color: var(--cds-text-secondary);
+  margin-top: auto;
+}
+
+// Responsive adjustments
+@media (max-width: 672px) {
+  .metric-card {
+    padding: $spacing-04;
+  }
+
+  .metric-card-value {
+    @include type-style('productive-heading-04');
+  }
+}
+
+// Made with Bob

@@ -1,0 +1,128 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+
+.quick-starters {
+  height: 100%;
+  padding: $spacing-05;
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-starters-header {
+  margin-bottom: $spacing-05;
+}
+
+.quick-starters-title {
+  @include type-style('productive-heading-03');
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.quick-starters-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+  overflow-y: auto;
+  max-height: 400px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--cds-layer-01);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--cds-border-subtle);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--cds-border-strong);
+    }
+  }
+}
+
+.quick-starter-item {
+  padding: $spacing-04;
+  background: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--cds-layer-hover);
+    border-color: var(--cds-border-strong);
+    transform: translateX(4px);
+  }
+
+  &:active {
+    background: var(--cds-layer-active);
+  }
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+}
+
+.item-title {
+  @include type-style('body-compact-01');
+  color: var(--cds-text-primary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+  flex-wrap: wrap;
+}
+
+.item-date {
+  @include type-style('label-01');
+  color: var(--cds-text-secondary);
+}
+
+.item-type {
+  @include type-style('label-01');
+  color: var(--cds-text-secondary);
+  padding: 2px 8px;
+  background: var(--cds-layer-02);
+  border-radius: 4px;
+}
+
+.quick-starters-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-07;
+  color: var(--cds-text-secondary);
+  @include type-style('body-compact-01');
+
+  p {
+    margin: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 672px) {
+  .quick-starters {
+    padding: $spacing-04;
+  }
+
+  .quick-starters-list {
+    max-height: 300px;
+  }
+
+  .item-meta {
+    gap: $spacing-02;
+  }
+}
+
+// Made with Bob

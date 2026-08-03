@@ -1,0 +1,242 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+
+.contract-detail {
+  padding: 2rem;
+  max-width: 1584px;
+  margin: 0 auto;
+}
+
+.contract-detail-loading,
+.contract-detail-error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  gap: $spacing-05;
+}
+
+.contract-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: $spacing-06 0;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-04;
+
+    h1 {
+      @include type-style('productive-heading-05');
+      color: var(--cds-text-primary);
+      margin: 0;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: $spacing-03;
+  }
+}
+
+.contract-detail-info {
+  margin-bottom: $spacing-06;
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-03;
+  }
+
+  .info-label {
+    @include type-style('label-01');
+    color: var(--cds-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .info-value {
+    @include type-style('body-compact-01');
+    color: var(--cds-text-primary);
+  }
+}
+
+.text-secondary {
+  color: var(--cds-text-secondary);
+  @include type-style('body-compact-01');
+}
+
+// Tabs customization
+:global {
+  .cds--tabs {
+    margin-top: $spacing-06;
+  }
+
+  .cds--tab-content {
+    padding: $spacing-05 0;
+  }
+}
+
+// Clauses panel
+.clauses-panel {
+  .clauses-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-05;
+  }
+
+  .clause-item {
+    padding: $spacing-05;
+  }
+
+  .clause-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $spacing-04;
+
+    h4 {
+      @include type-style('productive-heading-02');
+      color: var(--cds-text-primary);
+      margin: 0;
+      flex: 1;
+    }
+
+    .clause-tags {
+      display: flex;
+      gap: $spacing-02;
+      flex-shrink: 0;
+    }
+  }
+
+  .clause-content {
+    @include type-style('body-compact-01');
+    color: var(--cds-text-primary);
+    line-height: 1.6;
+    margin: 0 0 $spacing-04 0;
+    white-space: pre-wrap;
+  }
+
+  .clause-analysis {
+    padding: $spacing-04;
+    background: var(--cds-layer-02);
+    border-radius: 4px;
+    margin-top: $spacing-04;
+
+    strong {
+      @include type-style('label-01');
+      color: var(--cds-text-secondary);
+      display: block;
+      margin-bottom: $spacing-02;
+    }
+
+    p {
+      @include type-style('body-compact-01');
+      color: var(--cds-text-primary);
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Sections panel
+.sections-panel {
+  .sections-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-05;
+  }
+
+  .section-item {
+    padding: $spacing-05;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $spacing-04;
+
+    h4 {
+      @include type-style('productive-heading-02');
+      color: var(--cds-text-primary);
+      margin: 0;
+      flex: 1;
+    }
+  }
+
+  .section-content {
+    @include type-style('body-compact-01');
+    color: var(--cds-text-primary);
+    line-height: 1.6;
+    margin: 0 0 $spacing-04 0;
+    white-space: pre-wrap;
+  }
+
+  .section-meta {
+    display: flex;
+    gap: $spacing-05;
+    @include type-style('label-01');
+    color: var(--cds-text-secondary);
+  }
+}
+
+// Empty state
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-09;
+  color: var(--cds-text-secondary);
+  @include type-style('body-compact-01');
+
+  p {
+    margin: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 672px) {
+  .contract-detail {
+    padding: 1rem;
+  }
+
+  .contract-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-04;
+
+    .header-left {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+
+      h1 {
+        @include type-style('productive-heading-04');
+      }
+    }
+
+    .header-actions {
+      width: 100%;
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .clause-header,
+  .section-header {
+    flex-direction: column;
+    gap: $spacing-03;
+
+    .clause-tags {
+      align-self: flex-start;
+    }
+  }
+}
+
+// Made with Bob

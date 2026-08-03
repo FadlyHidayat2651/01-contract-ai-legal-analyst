@@ -1,0 +1,52 @@
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/muhammadfadlyhidayat/Documents/ibm/IBM 2026/BOB in Action/Bob - Legal Analyst - Telkom/new-process/contract_analysis_pipeline.py", line 28, in <module>
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/langchain_text_splitters/__init__.py", line 39, in <module>
+    from langchain_text_splitters.sentence_transformers import (
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/langchain_text_splitters/sentence_transformers.py", line 11, in <module>
+    from sentence_transformers import (  # type: ignore[import-not-found, unused-ignore]
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/sentence_transformers/__init__.py", line 14, in <module>
+    from sentence_transformers.cross_encoder.CrossEncoder import CrossEncoder
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/sentence_transformers/cross_encoder/__init__.py", line 3, in <module>
+    from .CrossEncoder import CrossEncoder
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/sentence_transformers/cross_encoder/CrossEncoder.py", line 14, in <module>
+    from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTokenizer, is_torch_npu_available
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 1806, in __getattr__
+    value = getattr(module, name)
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 1805, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 1817, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/models/auto/modeling_auto.py", line 21, in <module>
+    from .auto_factory import (
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 40, in <module>
+    from ...generation import GenerationMixin
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 1805, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 1817, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/generation/utils.py", line 29, in <module>
+    from ..cache_utils import (
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/cache_utils.py", line 1873, in <module>
+    class OffloadedStaticCache(StaticCache):
+  File "/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/cache_utils.py", line 1941, in OffloadedStaticCache
+    offload_device: Union[str, torch.device] = torch.device("cpu"),
+/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/transformers/cache_utils.py:1941: UserWarning: Failed to initialize NumPy: _ARRAY_API not found (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+  offload_device: Union[str, torch.device] = torch.device("cpu"),
+/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/torchvision/datapoints/__init__.py:12: UserWarning: The torchvision.datapoints and torchvision.transforms.v2 namespaces are still Beta. While we do not expect major breaking changes, some APIs may still change according to user feedback. Please submit any feedback you may have in this issue: https://github.com/pytorch/vision/issues/6753, and you can also check out https://github.com/pytorch/vision/issues/7319 to learn more about the APIs that we suspect might involve future changes. You can silence this warning by calling torchvision.disable_beta_transforms_warning().
+  warnings.warn(_BETA_TRANSFORMS_WARNING)
+/Users/muhammadfadlyhidayat/miniconda3/lib/python3.11/site-packages/torchvision/transforms/v2/__init__.py:54: UserWarning: The torchvision.datapoints and torchvision.transforms.v2 namespaces are still Beta. While we do not expect major breaking changes, some APIs may still change according to user feedback. Please submit any feedback you may have in this issue: https://github.com/pytorch/vision/issues/6753, and you can also check out https://github.com/pytorch/vision/issues/7319 to learn more about the APIs that we suspect might involve future changes. You can silence this warning by calling torchvision.disable_beta_transforms_warning().
+  warnings.warn(_BETA_TRANSFORMS_WARNING)
