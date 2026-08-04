@@ -1,58 +1,137 @@
 # Contract AI Legal Analyst
 
-AI-powered contract analysis platform that uses a multi-agent pipeline to review legal documents, extract risk factors, build knowledge graphs, and generate compliance reports.
+> **Multi-agent AI platform for automated legal contract review, risk scoring, and knowledge graph extraction — powered by IBM watsonx.ai**
 
-## What it does
-- Ingests PDF/Word contracts and extracts structured data via OCR (Docling)
-- Builds a Neo4j knowledge graph of entities, clauses, and relationships
-- Routes documents through specialist AI agents (legal counsel, compliance officer, risk manager, credit analyst, AML officer) powered by IBM watsonx.ai
-- Scores contract risk and generates a detailed review report
-- Stores embeddings in AstraDB (vector store) for semantic search
+A full-stack application that replaces manual contract review with a pipeline of specialist AI agents. Upload a contract, get back a structured risk report with clause-level analysis, compliance flags, and an entity relationship graph — in minutes, not days.
+
+---
+
+## Architecture
+
+```
+┌─────────────────────┐     ┌──────────────────────────────────────────────┐
+│  React + TypeScript │────▶│  FastAPI Backend                              │
+│  Carbon Design Sys  │     │                                              │
+└─────────────────────┘     │  ┌──────────────┐   ┌─────────────────────┐ │
+                             │  │  Ingestion    │   │  Multi-Agent Review │ │
+                             │  │  Pipeline     │   │                     │ │
+                             │  │  (Docling OCR)│   │  • legal_counsel    │ │
+                             │  └──────┬───────┘   │  • compliance_agent │ │
+                             │         │            │  • risk_manager     │ │
+                             │         ▼            │  • credit_analyst   │ │
+                             │  ┌──────────────┐   │  • aml_officer      │ │
+                             │  │  Embeddings  │   └──────────┬──────────┘ │
+                             │  │  + Chunking  │              │            │
+                             │  └──────┬───────┘              ▼            │
+                             └─────────┼─────────────────────────────────┘ │
+                                       │                                    │
+              ┌────────────────────────┼──────────────────────┐            │
+              ▼                        ▼                       ▼            │
+        ┌──────────┐           ┌──────────────┐        ┌──────────────┐   │
+        │ AstraDB  │           │    Neo4j     │        │  PostgreSQL  │   │
+        │ (vectors)│           │(knowledge    │        │  (metadata + │   │
+        └──────────┘           │  graph)      │        │   contracts) │   │
+                               └──────────────┘        └──────────────┘
+```
+
+## Features
+
+| Feature | Description |
+|---|---|
+| **Document Ingestion** | PDF/DOCX upload → OCR → chunking → embedding (Docling + watsonx.ai) |
+| **Knowledge Graph** | Extracts parties, obligations, dates, penalties into Neo4j |
+| **Multi-Agent Review** | 5 specialist agents analyse clauses in parallel via IBM watsonx.ai |
+| **Risk Scoring** | Aggregated contract risk score (0–100) with per-clause breakdown |
+| **Vector Search** | Semantic clause retrieval across all uploaded contracts |
+| **Report Generation** | Structured PDF/JSON report with agent findings and recommendations |
 
 ## Tech Stack
+
 | Layer | Technology |
 |---|---|
-| Backend | Python, FastAPI, Alembic |
-| Frontend | React, TypeScript, Vite, Carbon Design System |
-| LLM | IBM watsonx.ai (Llama 4), Google Gemini, Ollama |
-| Graph DB | Neo4j |
-| Relational DB | PostgreSQL |
-| Vector Store | DataStax AstraDB / IBM Milvus |
+| Backend | Python 3.11, FastAPI, Alembic, SQLAlchemy |
+| Frontend | React 18, TypeScript, Vite, Carbon Design System |
+| LLM / Embeddings | IBM watsonx.ai (Llama 4 Maverick + Slate-125m) |
+| Knowledge Graph | Neo4j 5 |
+| Relational DB | PostgreSQL 15 |
+| Vector Store | DataStax AstraDB (primary) / IBM Milvus (alternative) |
+| OCR | Docling |
 | Container | Docker, docker-compose |
 
-## How to Run
+## Getting Started
 
 ### Prerequisites
 - Python 3.11+, Node 18+, Docker
-- PostgreSQL running locally (or update `DATABASE_URL`)
-- Neo4j running locally (or via Docker)
+- IBM watsonx.ai account (API key + project ID)
+- PostgreSQL + Neo4j (included in docker-compose)
 
-### Backend
+### Quick start with Docker
+```bash
+git clone <repo>
+cd 01-contract-ai-legal-analyst
+cp backend/.env.example backend/.env   # fill in credentials
+docker-compose up --build
+```
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API docs: http://localhost:8000/docs
+
+### Manual setup
+
+**Backend**
 ```bash
 cd backend
-cp .env.example .env        # fill in your credentials
+cp .env.example .env
 pip install -r requirements.txt
 alembic upgrade head
 uvicorn app.main:app --reload --port 8000
 ```
 
-### Frontend
+**Frontend**
 ```bash
 cd frontend
 npm install
-npm run dev                  # runs on http://localhost:3000
-```
-
-### Docker (full stack)
-```bash
-docker-compose up --build
+npm run dev
 ```
 
 ## Environment Variables
-Copy `backend/.env.example` to `backend/.env`. Required variables:
-- `WATSONX_API_KEY` / `WATSONX_PROJECT_ID` — IBM watsonx.ai credentials
-- `DATABASE_URL` — PostgreSQL connection string
-- `NEO4J_PASSWORD` — Neo4j password
-- `ASTRA_TOKEN` + `ASTRA_ENDPOINT` — AstraDB vector store
 
-See `.env.example` for full list with descriptions.
+Copy `backend/.env.example` to `backend/.env`:
+
+| Variable | Description |
+|---|---|
+| `WATSONX_API_KEY` | IBM watsonx.ai API key |
+| `WATSONX_PROJECT_ID` | watsonx.ai project ID |
+| `WATSONX_URL` | Regional endpoint (e.g. `https://us-south.ml.cloud.ibm.com`) |
+| `DATABASE_URL` | PostgreSQL connection string |
+| `NEO4J_URI` / `NEO4J_PASSWORD` | Neo4j connection |
+| `ASTRA_TOKEN` + `ASTRA_ENDPOINT` | DataStax AstraDB vector store |
+| `LLM_PROVIDER` | `watsonx` \| `gemini` \| `ollama` (default: `watsonx`) |
+
+See `.env.example` for the full list with descriptions.
+
+## Project Structure
+
+```
+01-contract-ai-legal-analyst/
+├── backend/
+│   ├── app/
+│   │   ├── main.py              # FastAPI app entry point
+│   │   ├── api/                 # Route handlers
+│   │   ├── services/            # Business logic
+│   │   │   ├── ingestion.py     # Document processing pipeline
+│   │   │   ├── agents/          # Specialist AI agents
+│   │   │   └── graph.py         # Neo4j knowledge graph
+│   │   ├── models/              # SQLAlchemy models
+│   │   └── schemas/             # Pydantic schemas
+│   ├── alembic/                 # DB migrations
+│   ├── requirements.txt
+│   └── .env.example
+├── frontend/
+│   ├── src/
+│   │   ├── pages/               # Contract upload, review, dashboard
+│   │   ├── components/          # Reusable Carbon components
+│   │   └── services/            # API client
+│   └── package.json
+└── docker-compose.yml
+```
