@@ -1,5 +1,6 @@
-# Python
+# ── Python ─────────────────────────────────────────────────
 venv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo
@@ -14,25 +15,56 @@ build/
 .ruff_cache/
 *.so
 
-# Env
+# ── Environment / Secrets ──────────────────────────────────
 .env
 .env.local
 .env.*.local
-
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb_checkpoints
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-
-# Keys / secrets
+env.txt
 *.pem
 *.key
 *.crt
+*.p12
+*.pfx
+
+# ── Node / Frontend ────────────────────────────────────────
+node_modules/
+dist/
+build/
+.next/
+npm-debug.log*
+yarn-debug.log*
+
+# ── Jupyter ────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── ML / Model artefacts ───────────────────────────────────
+*.pkl
+*.pickle
+*.joblib
+*.model
+*.bin
+*.h5
+*.pt
+*.pth
+*.onnx
+
+# ── Databases ──────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── OS ─────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Bob / Claude ───────────────────────────────────────────
+.claude/
+.mcp.json
